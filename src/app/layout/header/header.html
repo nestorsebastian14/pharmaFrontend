@@ -5,5 +5,11 @@
         <a routerLink="/inicio">Inicio</a>
         <a href="http://localhost:8080/swagger-ui.html" target="_blank" rel="noopener">API</a>
     </nav>
-    <span class="usuario">Invitado</span>
+    <div class="usuario">
+        <span class="nombre">{{ auth.nombreCompleto() }}</span>
+        @for (rol of auth.roles(); track rol) {
+        <span class="rol">{{ rol }}</span>
+        }
+        <button type="button" class="btn-salir" (click)="auth.cerrarSesion()">Cerrar sesión</button>
+    </div>
 </header>

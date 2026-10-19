@@ -1,0 +1,43 @@
+.barra {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.buscador {
+    max-width: 380px;
+}
+
+.tamanio {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.ordenable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.acciones {
+    display: flex;
+    gap: 8px;
+}
+
+.vacio {
+    text-align: center;
+    color: #6b7280;
+    padding: 24px;
+}
+
+.paginador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+}

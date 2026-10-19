@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { Categoria } from '../../models/categoria.model';
 import { CategoriaService } from '../../services/categoria-service';
 import { mensajeError } from '../../../../core/utils/http-error';
+import { AuthService } from '../../../../core/services/auth-service';
 @Component({
   selector: 'app-categoria-list',
   imports: [RouterLink],
@@ -12,6 +13,8 @@ import { mensajeError } from '../../../../core/utils/http-error';
 })
 export class CategoriaList implements OnInit {
   private readonly categoriaService = inject(CategoriaService);
+  private readonly auth = inject(AuthService);
+  protected readonly puedeEscribir = computed(() => this.auth.tiene('CATALOGO_ESCRIBIR'));
   protected readonly categorias = signal<Categoria[]>([]);
   protected readonly cargando = signal(false);
   protected readonly error = signal<string | null>(null);

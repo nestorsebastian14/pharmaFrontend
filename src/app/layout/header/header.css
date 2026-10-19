@@ -44,6 +44,34 @@
 
 .usuario {
     margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-size: 14px;
-    opacity: 0.85;
+}
+
+.nombre {
+    opacity: 0.9;
+}
+
+.rol {
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.15);
+    font-size: 12px;
+}
+
+.btn-salir {
+    margin-left: 8px;
+    padding: 6px 12px;
+    border: 1px solid rgb(255 255 255 / 0.5);
+    border-radius: 8px;
+    background: none;
+    color: #fff;
+    font: inherit;
+    cursor: pointer;
+}
+
+.btn-salir:hover {
+    background: rgb(255 255 255 / 0.12);
 }

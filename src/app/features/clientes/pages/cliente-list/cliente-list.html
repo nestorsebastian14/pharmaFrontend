@@ -1,0 +1,79 @@
+<section class="page">
+    <header class="page-header">
+        <h2>Clientes</h2>
+        @if (puedeEscribir()) {
+        <a routerLink="nuevo" class="btn btn-primary">+ Nuevo cliente</a>
+        }
+    </header>
+
+    <div class="barra">
+        <input class="input buscador" placeholder="Buscar por DNI, nombres o apellidos (página actual)..."
+            [value]="filtro()" (input)="filtro.set($any($event.target).value)" />
+        <label class="tamanio">
+            Filas por página
+            <select class="input" (change)="cambiarTamanio($any($event.target).value)">
+                @for (t of tamanios; track t) {
+                <option [value]="t" [selected]="t === tamanio()">{{ t }}</option>
+                }
+            </select>
+        </label>
+    </div>
+
+    @if (error()) {
+    <div class="alerta">{{ error() }}</div>
+    }
+
+    @if (cargando()) {
+    <p>Cargando clientes...</p>
+    } @else {
+    <table class="tabla">
+        <thead>
+            <tr>
+                <th class="ordenable" (click)="ordenar('dni')">DNI {{ indicador('dni') }}</th>
+                <th class="ordenable" (click)="ordenar('apellidos')">Apellidos y nombres {{ indicador('apellidos') }}</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Estado</th>
+                @if (puedeEscribir()) {
+                <th>Acciones</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (c of filtrados(); track c.id) {
+            <tr>
+                <td>{{ c.dni }}</td>
+                <td>{{ c.apellidos }}, {{ c.nombres }}</td>
+                <td>{{ c.email }}</td>
+                <td>{{ c.telefono ?? '—' }}</td>
+                <td>
+                    <span class="badge" [class.inactivo]="!c.estado">{{ c.estado ? 'Activo' : 'Inactivo' }}</span>
+                </td>
+                @if (puedeEscribir()) {
+                <td class="acciones">
+                    <a [routerLink]="[c.id, 'editar']" class="btn">Editar</a>
+                    <button type="button" class="btn btn-peligro" (click)="darDeBaja(c)">Dar de baja</button>
+                </td>
+                }
+            </tr>
+            } @empty {
+            @if (!error()) {
+            <tr>
+                <td [attr.colspan]="puedeEscribir() ? 6 : 5" class="vacio">
+                    {{ filtro().trim() ? 'Ningún cliente de esta página coincide con la búsqueda.' : 'No hay clientes registrados.' }}
+                </td>
+            </tr>
+            }
+            }
+        </tbody>
+    </table>
+
+    @if (respuesta(); as r) {
+    <footer class="paginador">
+        <button type="button" class="btn" [disabled]="pagina() === 0" (click)="anterior()">Anterior</button>
+        <span>Página {{ r.pagina + 1 }} de {{ r.totalPaginas || 1 }} · {{ r.totalElementos }} clientes</span>
+        <button type="button" class="btn" [disabled]="r.ultima" (click)="siguiente()">Siguiente</button>
+    </footer>
+    }
+    }
+</section>
