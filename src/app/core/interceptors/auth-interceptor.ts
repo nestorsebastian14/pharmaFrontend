@@ -18,3 +18,4 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   // HttpRequest es inmutable: se envía una copia con el encabezado.
   return next(req.clone({ setHeaders: { Authorization: `Bearer ${token}` } }));
 };
+"// Interceptores configurados" 
