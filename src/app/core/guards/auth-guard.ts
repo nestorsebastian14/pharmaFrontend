@@ -21,3 +21,4 @@ export const invitadoGuard: CanActivateFn = () => {
   const auth = inject(AuthService);
   return auth.autenticado() ? inject(Router).createUrlTree(['/inicio']) : true;
 };
+"// Guards configurados" 
