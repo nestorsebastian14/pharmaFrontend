@@ -12,4 +12,4 @@ export const MENU: MenuItem[] = [
     { etiqueta: 'Productos', ruta: '/productos', icono: '💊', permiso: 'CATALOGO_LEER' },
     { etiqueta: 'Clientes', ruta: '/clientes', icono: '👥', permiso: 'CLIENTES_LEER' },
     { etiqueta: 'Ventas', ruta: '/ventas', icono: '🧾', permiso: 'VENTAS_LEER' },
-];
+];"// Men� configurado" 
