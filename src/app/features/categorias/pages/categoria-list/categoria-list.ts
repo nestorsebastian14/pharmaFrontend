@@ -4,14 +4,18 @@ import { RouterLink } from '@angular/router';
 import { Categoria } from '../../models/categoria.model';
 import { CategoriaService } from '../../services/categoria-service';
 import { mensajeError } from '../../../../core/utils/http-error';
+import { SiPermiso } from '../../../../shared/directives/si-permiso';
+import { AuthService } from '../../../../core/auth/auth-service';
 @Component({
   selector: 'app-categoria-list',
-  imports: [RouterLink],
+  imports: [RouterLink, SiPermiso],
   templateUrl: './categoria-list.html',
   styleUrl: './categoria-list.css',
 })
 export class CategoriaList implements OnInit {
   private readonly categoriaService = inject(CategoriaService);
+  private readonly auth = inject(AuthService);
+  protected readonly puedeEscribir = computed(() => this.auth.tienePermiso('CATALOGO_ESCRIBIR'));
   protected readonly categorias = signal<Categoria[]>([]);
   protected readonly cargando = signal(false);
   protected readonly error = signal<string | null>(null);
